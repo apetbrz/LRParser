@@ -1,0 +1,7 @@
+int total = 5/7 + n * n;
+String word = "hello world";
+double dec = 0.01;
+0.0.1
+"fail
+err[]r
+"0.0.1" "err[]r"
