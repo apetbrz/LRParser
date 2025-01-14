@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 public class Main{
 
-    public static final boolean DEBUG_PRINT = false;
+    public static final boolean DEBUG_PRINT = true;
     final static Scanner scan = new Scanner(System.in);
 
     public static void main(String[] args) {

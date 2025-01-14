@@ -89,22 +89,25 @@ public class LRParser {
     //and a String array (actions) representing each row of the column
     private enum ACTION_TABLE {
         ID(LexAn.TOKEN.IDENTIFIER, new String[]{
-                "s5",null,null,null,"s5",null,"s5","s5"
+            "s5",null,null,null,"s5",null,"s5","s5"
+        }),
+        INT_LIT(LexAn.TOKEN.INT_LIT, new String[]{
+            "s5",null,null,null,"s5",null,"s5","s5"
         }),
         ADD_OP(LexAn.TOKEN.ADD_OP, new String[]{
-                null,"s6","r2","r4",null,"r6",null,null,"s6","r1","r3","r5"
+            null,"s6","r2","r4",null,"r6",null,null,"s6","r1","r3","r5"
         }),
         MULT_OP(LexAn.TOKEN.MULT_OP, new String[]{
-                null,null,"s7","r4",null,"r6",null,null,null,"s7","r3","r5"
+            null,null,"s7","r4",null,"r6",null,null,null,"s7","r3","r5"
         }),
         LEFT_PAREN(LexAn.TOKEN.LEFT_PAREN, new String[]{
-                "s4",null,null,null,"s4",null,"s4","s4",null,null,null,null
+            "s4",null,null,null,"s4",null,"s4","s4",null,null,null,null
         }),
         RIGHT_PAREN(LexAn.TOKEN.RIGHT_PAREN, new String[]{
-                null,null,"r2","r4",null,"r6",null,null,"s11","r1","r3","r5"
+            null,null,"r2","r4",null,"r6",null,null,"s11","r1","r3","r5"
         }),
         END_STR(LexAn.TOKEN.EOF, new String[]{
-                null,"acc","r2","r4",null,"r6",null,null,null,"r1","r3","r5"
+            null,"acc","r2","r4",null,"r6",null,null,null,"r1","r3","r5"
         });
 
         public final LexAn.TOKEN terminal;
@@ -162,7 +165,8 @@ public class LRParser {
             new Rule(NONTERMINAL.TERM, new Object[]{NONTERMINAL.TERM, LexAn.TOKEN.MULT_OP, NONTERMINAL.FACT}),
             new Rule(NONTERMINAL.TERM, new Object[]{NONTERMINAL.FACT}),
             new Rule(NONTERMINAL.FACT, new Object[]{LexAn.TOKEN.LEFT_PAREN, NONTERMINAL.EXPR, LexAn.TOKEN.RIGHT_PAREN}),
-            new Rule(NONTERMINAL.FACT, new Object[]{LexAn.TOKEN.IDENTIFIER})
+            new Rule(NONTERMINAL.FACT, new Object[]{LexAn.TOKEN.IDENTIFIER}),
+            new Rule(NONTERMINAL.FACT, new Object[]{LexAn.TOKEN.INT_LIT})
     };
 
     //PDAStack: the main stack used by the LR algorithm
@@ -321,7 +325,7 @@ public class LRParser {
 
             }//end currentAction switch
 
-        }while(currentAction != "acc"); //loop so long as the currentAction is not the Accept action
+        }while(!"acc".equals(currentAction)); //loop so long as the currentAction is not the Accept action
 
         //and finally, return
         return (TreeNode) treeNodeStack.get(0);
