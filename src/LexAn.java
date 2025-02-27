@@ -9,7 +9,7 @@ public class LexAn {
      */
 
     //char classes:
-    enum CHAR_CLASS{
+    public static enum CHAR_CLASS{
         EOF,
         LETTER,
         DIGIT,
@@ -19,7 +19,7 @@ public class LexAn {
     }
 
     //lexeme tokens:
-    enum TOKEN{
+    public static enum TOKEN{
         ERROR,
         EOF,
         KEYWORD,
@@ -40,7 +40,7 @@ public class LexAn {
     }
 
     //keywords:
-    enum KEYWORD{
+    public static enum KEYWORD{
         KEYWORD_INT("int"),
         KEYWORD_DOUBLE("double"),
         KEYWORD_STRING("String");
@@ -54,17 +54,16 @@ public class LexAn {
     static final Pattern INTEGER_LITERAL_REGEX = Pattern.compile("[0-9]+");
     static final Pattern DOUBLE_LITERAL_REGEX = Pattern.compile("[0-9]+\\.[0-9]+");
 
-    //global vars
-    static CHAR_CLASS charClass;
-    static StringBuilder lexeme;
-    static char nextChar;
-    static TOKEN token;
-    static int lineNumber = 1;
-    static int colNumber = 0;
+    //important class vars
+    CHAR_CLASS charClass;
+    StringBuilder lexeme;
+    char nextChar;
+    TOKEN token;
+    int lineNumber = 1;
+    int colNumber = 0;
 
     //file input
-    static BufferedReader reader;
-
+    BufferedReader reader;
 
     //default constructor: initialize array
     public LexAn(){
